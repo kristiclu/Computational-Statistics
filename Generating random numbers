@@ -1,17 +1,23 @@
+
+Generators of RN (random numbers) in SAS
+RANUNI (UNIFORM) function - gives us a number gnerated on uniform distribution on interval [0,1], 
+it use generator with mod m=2^31-1 and a=39820409
+
 First exercise
 First task
-By using seed = 1789 we want to generate a set of 100 pseudo-random numbers that follow an exponential distribution with a rate parameter of λ=2. Save the generated data into a table (a SAS data set), and then display the distribution of the data using a histogram. 
+By using seed = 1789 we want to generate a set of 100 pseudo-random numbers that follow an exponential 
+distribution with a rate parameter of λ=2. Save the generated data into a table (a SAS data set), and 
+then display the distribution of the data using a histogram. 
 (Instruction: Use PROC UNIVARIATE to display the histogram. Use SAS Help for reference.)
 
-Next, calculate the descriptive statistics (mean, median, standard deviation, skewness, and kurtosis) for the generated data.
-
-Finally, test the hypothesis that the data's distribution fits a theoretical exponential distribution (goodness-of-fit test).
-
-Comment on your results (discuss the values of the descriptive statistics and the fit with the theoretical distribution).
+Next, calculate the descriptive statistics (mean, median, standard deviation, skewness, and kurtosis) 
+for the generated data.Finally, test the hypothesis that the data's distribution fits a theoretical
+exponential distribution (goodness-of-fit test).Comment on your results (discuss the values of the 
+descriptive statistics and the fit with the theoretical distribution).
 
 
 
 Second task
-Generate a sample of 200 pseudo-random numbers that follow a Bernoulli distribution with the given parameter value p=0.15. 
-Calculate the descriptive statistics (mean, median, standard deviation) for the generated data. 
-Using the FREQ procedure, print a frequency table. Use a seed of 81434.
+Generate a sample of 200 pseudo-random numbers that follow a Bernoulli distribution with the given 
+parameter value p=0.15. Calculate the descriptive statistics (mean, median, standard deviation) for 
+the generated data. Using the FREQ procedure, print a frequency table. Use a seed of 81434.

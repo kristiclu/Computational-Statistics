@@ -1,7 +1,9 @@
 
 Generators of RN (random numbers) in SAS
-RANUNI (UNIFORM) function - gives us a number gnerated on uniform distribution on interval [0,1], 
+RANUNI (UNIFORM) function [good]- gives us a number gnerated on uniform distribution on interval [0,1], 
 it use generator with mod m=2^31-1 and a=39820409
+RAND - uses Mersenne-Twister generator, has a period of 2^19937-1
+
 
 First exercise
 First task
@@ -15,9 +17,58 @@ for the generated data.Finally, test the hypothesis that the data's distribution
 exponential distribution (goodness-of-fit test).Comment on your results (discuss the values of the 
 descriptive statistics and the fit with the theoretical distribution).
 
+%LET SEED =1789;
+%LET NREP=100;
+%let lambda=2;
+DATA data;
+CALL STREAMINIT(&SEED);
+DO REP = 1 TO &NREP;
+  X =RAND('EXPONENTIAL', 1/&lambda);
+  OUTPUT;
+ END;
+RUN;
+
+proc univariate data=data;
+	ods select Histogram;
+	var X;
+	histogram X;
+run;
+
+ods noproctitle;
+ods graphics / imagemap=on;
+
+*deskriptivna stat;
+proc means data=DATA chartype mean std skewness kurtosis median; *treba biti mean negdje cca 1/lambda;
+	var X; 
+run;
+
+proc univariate data=DATA;
+	ods select Histogram GoodnessOfFit;
+	var X;
+
+	/* Fitting Distributions */
+	histogram X / exp(sigma=0.5) kernel;
+run;
+ods graphics off;
 
 
 Second task
 Generate a sample of 200 pseudo-random numbers that follow a Bernoulli distribution with the given 
 parameter value p=0.15. Calculate the descriptive statistics (mean, median, standard deviation) for 
 the generated data. Using the FREQ procedure, print a frequency table. Use a seed of 81434.
+
+%Let SEED =81434;
+%LET NREP=200;
+%let p=0.15;
+DATA bern;
+CALL STREAMINIT(&SEED);
+DO REP = 1 TO &NREP;
+  B =RAND('BERN<', 0.15);
+  OUTPUT;
+ END;
+RUN;
+proc means data=bern chartype mean std median; 
+	var B; 
+run;
+proc FREQ data=bern;
+run;
